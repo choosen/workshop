@@ -4,12 +4,10 @@ class StudentDecorator < BaseDecorator
   end
 
   def avg_notes(subject_item)
-    cn = subject_item.subject_item_notes.count
-    if cn.nil? || cn == 0
-      return "0.00"
-    else
-      sum = subject_item.subject_item_notes.sum(:value)
-      return '%.2f' % (sum / cn.to_f)
-    end
+    cn = Student.find(id).subject_item_notes.where(:subject_item_id => subject_item.id ).map(&:value)
+    return "0.00" if cn.blank?
+    sum = 0.0
+    cn.each { |e| sum += e }
+    return '%.2f' % (sum / cn.length.to_f)
   end
 end
