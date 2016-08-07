@@ -5,7 +5,7 @@ class StudentDecorator < BaseDecorator
 
   def avg_notes(subject_item)
     cn = subject_item.subject_item_notes.count
-    if cn.nil?
+    if cn.nil? || cn == 0
       return "0.00"
     else
       sum = subject_item.subject_item_notes.sum(:value)
