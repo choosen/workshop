@@ -1,8 +1,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
   #expose(:subject_items) { SubjectItem.not_assigned_or_assigned_to_teacher(teacher_params) }
-  expose(:subject_items) { SubjectItem.not_assigned_or_assigned_to_teacher(2).includes(:teacher, :students) }
-  expose(:subject_item)
+  expose(:subject_items) { SubjectItem.includes(:teacher, :students) }
 
   private
   #
