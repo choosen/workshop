@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
   before_action :authenticate_user!
   expose(:teachers)
+  expose(:subject_items)
   expose(:teacher, attributes: :teacher_params)
   expose(:teacher_subject_items) { teacher.subject_items }
 
@@ -26,7 +27,6 @@ class TeachersController < ApplicationController
   end
 
   def subjects
-
   end
 
   private
