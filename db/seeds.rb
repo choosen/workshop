@@ -1,8 +1,8 @@
 puts "Seeds: start"
 
-Participation.delete_all
-SubjectItem.delete_all
 SubjectItemNote.delete_all
+SubjectItem.delete_all
+Participation.delete_all
 Teacher.delete_all
 Student.delete_all
 User.delete_all
@@ -11,26 +11,45 @@ User.delete_all
 TEACHER_TITLES = %w(Dr. Prof. TA)
 User.create!(email: 'admin@admin.com',password: 'adminadmin')
 
-3.times do
-  Teacher.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    academic_title: TEACHER_TITLES.sample
-  )
-end
+Teacher.create!(
+  first_name: 'Adam',
+  last_name: 'Nowak',
+  academic_title: TEACHER_TITLES.sample
+)
+
+Teacher.create!(
+  first_name: 'Piotr',
+  last_name: 'Wasiak',
+  academic_title: TEACHER_TITLES.sample
+)
+
+Teacher.create!(
+  first_name: 'Łukasz',
+  last_name: 'Kruk',
+  academic_title: TEACHER_TITLES.sample
+)
 
 teachers = Teacher.all
-5.times do
+subjects = %w{Math Polish Greek History Sport}
+
+subjects.each do |s|
   SubjectItem.create!(
-    title: Faker::Lorem.sentence,
+    title: s,
     teacher: teachers.sample
   )
 end
 
-25.times do
+names = %w{Adam|Barcik Mateusz|Komar Konrad|Mateusz Ewelina|Pipczynska
+          Kludia|Kowalska Adam|Nawałka Robert|Lewandowski Jan|Trevor
+          Jan|Wężyk Tadeusz|Zimoch Barbara|Kara Czesław|Miłosz
+          Adam|Kurtyka Mateusz|Mucha Anna|Mucha Karolina|Strzelec
+          Karina|Słaba Anna|Zgrabna Romuald|Traugut Stefan|Batory
+          Jan|Kazimierz Sebastian|Bach Norbert|Grześ Lech|Wałęsa
+          Roman|Duch}
+names.each do |s|
   Student.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name
+    first_name: s.split('|')[0],
+    last_name: s.split('|')[1]
   )
 end
 
